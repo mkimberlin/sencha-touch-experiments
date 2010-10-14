@@ -1,0 +1,58 @@
+.myapp {
+    background-color: blue;
+}
+
+.card1 {
+    background-color: black;
+    color: green;
+}
+
+.card3 {
+    background-color: orange;
+}
+
+.detail {
+    background-color: lightgray;
+}
+
+#cover {
+    float: left;
+    margin-right: 10px;
+}
+
+.title {
+	color: #222;
+    background-color: #FFF;
+    border: 1px solid #999;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    padding: 12px 10px;
+    margin: 0px 0px 0px 108px;
+    text-align: center;
+    height: 144px;
+    width: 197px;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+#bookTitle {
+    font-size: 17px;
+    font-weight: bold;
+    text-shadow: 0px 2px 0px #fff;
+}
+
+.author {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0px 2px 0px #fff;
+}
+
+#expandDesc {
+	font-weight: bold;
+}
+
+.updateDate, .currentPosition, .favorite {
+	font-size: 13px;
+}

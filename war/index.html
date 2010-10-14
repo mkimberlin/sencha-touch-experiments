@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>My First App</title>
+    
+    <!-- Sencha Touch CSS -->
+    <link rel="stylesheet" href="css/ext-touch.css" type="text/css">
+    
+    <!-- Your Application CSS -->
+    <link rel="stylesheet" href="css/myfirstapp.css" type="text/css">
+    
+    <!-- If you intend to use the map APIs, you will need the Google Maps JavaScript -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    
+    <!-- Sencha Touch JS -->
+    <script type="text/javascript" src="js/ext-touch-debug.js"></script>
+    
+    <!-- Your Application JS -->
+    <script type="text/javascript" src="js/myfirstapp.js"></script>
+</head>
+<body>
+<textarea id="recent" class="x-hidden-display">
+	<tpl for=".">
+		<li class="book-item">{title}
+		<tpl if="lastUpdated !== undefined">
+			<br/><span class="updateDate">Updated On: {lastUpdated}</span>
+		</tpl>
+		</li>
+    </tpl>
+</textarea>
+<textarea id="detail" class="x-hidden-display">
+	<div>
+    <img id="cover" src="{imageUrl}" height="144" width="98"/>
+    <div class="title">
+      <span id="bookTitle">{title}</span><br/>
+      <span class="author">by {authors}</span><br/><br/>
+      <span class="favorite">Add To Favorites</span>
+    </div>
+    <p id="description">{description}</p>
+    </div>
+</textarea>
+</body>
+</html>
