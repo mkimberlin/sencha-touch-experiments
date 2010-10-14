@@ -113,7 +113,7 @@ Sencha provides a number of visual components out-of-the-box. Creating instances
         }
     });
 
-As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation](http://dev.sencha.com/deploy/touch/docs/) for that class.  Here is an (incomplete) list of some of the more common component xtypes:  
+As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation](http://dev.sencha.com/deploy/touch/docs/) for that class.  Here is a (incomplete) list of some of the more common component xtypes:  
 
     xtype            Class
     -------------    ------------------
