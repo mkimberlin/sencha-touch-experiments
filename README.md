@@ -258,4 +258,6 @@ The Take Away
 -------------
 Mobile application development based on HTML5, JavaScript and CSS is a viable option for many types of applications and frameworks like Sencha Touch make it even more attractive.  Standard web technologies can be used to implement mobile applications that are pleasant to use, fully featured and functional on or off-line.  Sencha Touch is tackling an ambitious goal with encouraging results.  While there are a few rough points in the API, the project is still in beta and there are sure to be further improvements to come.
 
-The example code used in this article is available on [github](http://github.com/mkimberlin/sencha-touch-experiments/) and can also be seen ["in action"](http://touchexperiments.appspot.com).  Thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice and to Lance Finney for his unending patience.
+The example code used in this article is available on [github](http://github.com/mkimberlin/sencha-touch-experiments/) and can also be seen [in action](http://touchexperiments.appspot.com).  It should also be noted that there is a wealth of example applications included with the Sencha Touch download.  The included examples are extremely helpful and cover a broad variety of situations that you may encounter.
+
+Finally, a special word of thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice as well as Lance Finney for his unending patience.
