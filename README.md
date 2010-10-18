@@ -10,7 +10,7 @@ Sencha applications are web applications. As such, they are built entirely on HT
 
 Getting Started
 ---------------
-Setting up a Sencha Touch project is easy. The Sencha Touch source can be downloaded from the [product page][3]. Extract the Sencha Touch development JavaScript source and CSS to the desired location in your project. Then construct a simple HTML file that references both of these files as well as any application CSS files that you might have and the JavaScript source file that you will use. The source for such a page should look something like this:
+Setting up a Sencha Touch project is easy. The Sencha Touch source can be downloaded from the [product page][3]. Extract the Sencha Touch development JavaScript source and CSS to the desired location in your project. Then construct a simple HTML file that references both of these files as well as any application CSS files that you might have and the JavaScript source file that you will use. Be sure to include the HTML5 document type as the first line in the file. The source for such a page should look something like this:
 
     <!DOCTYPE html>
     <html>
@@ -36,7 +36,7 @@ Setting up a Sencha Touch project is easy. The Sencha Touch source can be downlo
     <body></body>
     </html>
 
-Once the application HTML is in place, development of your mobile application can begin in earnest.  Simply instruct Sencha Touch to create the desired namespace and call the Ext.setup method with an application configuration.
+Once the application HTML is in place, development of your mobile application can begin in earnest. Since Sencha Touch is built upon the [Ext JS library][4], an application must start by instructing Ext JS to create any namespaces used in the application and calling the Ext.setup method with the application configuration.
 
     Ext.namespace('MyApp');
 
@@ -101,8 +101,6 @@ Sencha provides a number of visual components out-of-the-box. Creating instances
                 label: 'Whee!'
             }]
         }],
-        detail: null,
-        booklist: null,
         initComponent: function() {
             this.booklist = new MyApp.BookList(); 
             MyApp.App.superclass.initComponent.call(this);
@@ -170,7 +168,7 @@ The form panel makes use of a number of other components:
 
 ![A form containing a few example field components][img5]
 	
-As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation][4] for that class.  Here is a (incomplete) list of some of the more common component xtypes:  
+As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation][5] for that class.  Here is a (incomplete) list of some of the more common component xtypes:  
 
     xtype            Class
     -------------    ------------------
@@ -209,7 +207,7 @@ As you can see, the declarative method of component definition is relatively con
 
 Custom Components
 -----------------
-While the components provided by Sencha Touch provide a great starting point, you will eventually need to define components with custom behavior and presentation.  This can be done using Ext.extend().  The implementation of MyApp.App above makes use of this mechanism to customize the behavior of Ext.TabPanel.  It is also possible to define the HTML for a component via the "html" or "tpl" configuration options.  Sencha provides [a tutorial][5] that details some pitfalls and best practices to consider when developing custom components.
+While the components provided by Sencha Touch provide a great starting point, you will eventually need to define components with custom behavior and presentation.  This can be done using Ext.extend() to extend any subclass of Ext.Component, which acts as a superclass for all Sencha Touch components. Ext.DataView is frequently extended in this way when working with multiple data items as it provides automatic synchronization with a data store as well as a number of common events and a built in selection model.  The implementation of MyApp.App above makes use of this mechanism to customize the behavior of Ext.TabPanel.  It is also possible to define the HTML for a component via the "html" configuration option.  Sencha provides [a tutorial][6] that details some pitfalls and best practices to consider when developing custom components.
 
 Events and Handlers
 -------------------
@@ -236,7 +234,7 @@ Providing custom behaviors is typically done by writing event handlers. Most Sen
         }
     });
 
-Here you can see that the onItemTap is registered to handle the 'itemtap' event on this extension of Ext.List.  In turn, it fires a custom event and provides the title of the selected book to any registered handlers.  The arguments provided to the handlers of any given event may vary.  You can find information on the events for a particular component in the [Sencha Touch API documentation][4].
+Here you can see that the onItemTap is registered to handle the 'itemtap' event on this extension of Ext.List.  In turn, it fires a custom event and provides the title of the selected book to any registered handlers.  The arguments provided to the handlers of any given event may vary.  You can find information on the events for a particular component in the [Sencha Touch API documentation][5].
 
 Templating
 ----------
@@ -250,14 +248,14 @@ When creating custom components, you will inevitably come across the need to def
         '</tpl></p>',
         '<p>Episodes: ',
         '<tpl for="episodes">',
-           '<div class="{[xindex % 2 === 0 ? "even" : "odd"]}">',
+            '<div class="{[xindex % 2 === 0 ? "even" : "odd"]}">',
             '{title} - {description}',
             '</div>',
         '</tpl></p>'
     );
     tpl.overwrite(panel.body, data);
 
-More frequently, templates will be utilized declaratively.  Sencha Touch takes an interesting approach to removing HTML templates from the code.  Since the templating tags are not valid HTML, the templates cannot be embedded as hidden DIV tags inside the HTML file.  Instead, text areas are used to contain the templates and are then hidden with CSS.
+More frequently, templates will be utilized declaratively rather than via the constructor as above. Sencha Touch takes an interesting approach to removing HTML templates from the code. Since the templating tags are not valid HTML, the templates cannot be embedded as hidden DIV tags inside the HTML file.  Instead, text areas are used to contain the templates and are then hidden with CSS.
 
     <textarea id="recent" class="x-hidden-display">
         <tpl for=".">
@@ -269,7 +267,7 @@ More frequently, templates will be utilized declaratively.  Sencha Touch takes a
         </tpl>
     </textarea>
 
-A template based on this definition can then be constructed with a call to Ext.XTemplate.from().  This is generally done during component initialization and before the call to the superclass' initComponent method.  It cannot be assigned directly to the tpl configuration parameter when done like this, as the DOM has not been initialized at the point that the definition is processed.  Delaying this call until the component is being initialized will ensure that the document is ready.  This can be seen in the earlier implementation of MyApp.BookList:
+A template based on this definition can then be constructed with a call to Ext.XTemplate.from().  This is generally done during component initialization and before the call to the superclass' initComponent method.  It cannot be assigned directly to the tpl configuration parameter when done like this, as the DOM has not been initialized at the point that the definition is processed.  Delaying this call until the component is being initialized will ensure that the document is ready.  This can be seen in the implementation of initComponent found in MyApp.BookList:
 
         initComponent: function() {
             this.tpl = Ext.XTemplate.from('recent');
@@ -284,7 +282,7 @@ Either of these approaches gives a list with customized item formatting and beha
 
 Data Stores
 -----------
-Most of the time, you will not be working with static data sets.  Sencha Touch provides a CRUD based abstraction for data stores in Ext.data.Store. Sencha comes with implementations of HTML5-based local and session storage backed data stores as well as array and JSON based implementations.  Data stores access their data via Ext.data.Proxy implementations.  Sencha comes with proxies for accessing data via RESTful web services, generic AJAX calls, local or session storage.  Both JSON and XML are supported as transmission formats and other formats can be accomplished by implementing custom marshaling logic.  The MyApp.bookstore data store used by the example application is a JSON backed store that retrieves its data via a RESTful web service.
+Most of the time, you will not be working with static data sets.  Sencha Touch provides a CRUD-based abstraction for data stores in Ext.data.Store. Sencha comes with implementations of HTML5-based local and session storage backed data stores as well as array and JSON-based implementations.  Data stores access their data via Ext.data.Proxy implementations.  Sencha comes with proxies for accessing data via RESTful web services, generic AJAX calls, local or session storage.  Both JSON and XML are supported as transmission formats and other formats can be accomplished by implementing custom marshaling logic.  The MyApp.bookstore data store used by the example application is a JSON backed store that retrieves its data via a RESTful web service.
 
     MyApp.bookstore = new Ext.data.JsonStore({
         autoDestroy: true,
@@ -313,23 +311,24 @@ It is then used to provide data to the MyApp.BookList component in its initCompo
             MyApp.BookList.superclass.initComponent.call(this);
         }
 
-Different data stores can share a common model as well, enabling the simple implementation of locally cached data that is refreshed from the server when possible or appropriate. Changes to data stores can be synchronized to their source automatically, on request or in batch mode.  Template based components are data store aware and automatically update their presentation based on changes to their data source.
+Different data stores can share a common model as well, enabling the simple implementation of locally cached data that is refreshed from the server when possible or appropriate. Changes to data stores can be synchronized to their source automatically, on request or in batch mode.  Template-based components are data store aware and automatically update their presentation based on changes to their data source.
 
 The Take Away
 -------------
-Mobile application development based on HTML5, JavaScript and CSS is a viable alternative for many types of applications. Frameworks like Sencha Touch make this an even more attractive option. Standard web technologies can be used to implement mobile applications that are pleasant to use, fully featured and functional on or off-line. The web-based mobile application space is still heating up. With frameworks like the just announced [jQuery Mobile][6] on the horizon and Jonathan Stark's adoption of the [jQTouch][7] framework, there are sure to be a wealth of options and a healthy competition going forward. Sencha Touch is tackling an ambitious goal with encouraging results. While there are a few rough points in the API, the project is still in beta and there are sure to be further improvements to come.
+Mobile application development based on HTML5, JavaScript and CSS is a viable alternative for many types of applications. Frameworks like Sencha Touch make this an even more attractive option. Standard web technologies can be used to implement mobile applications that are pleasant to use, fully featured and functional on or off-line. The web-based mobile application space is still heating up. With frameworks like the just announced [jQuery Mobile][7] on the horizon and Jonathan Stark's adoption of the [jQTouch][8] framework, there are sure to be a wealth of options and a healthy competition going forward. Sencha Touch is tackling an ambitious goal with encouraging results. While there are a few rough points in the API, the project is still in beta and there are sure to be further improvements to come.
 
-The example code used in this article is available on [github][8] and can also be seen ["in action"][9].  Thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice and to Lance Finney for his unending patience.
+The example code used in this article is available on [github][9] and can also be seen ["in action"][10].  Thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice and to Lance Finney for his unending patience.
 
 [1]: http://www.sencha.com
 [2]: http://www.phonegap.com
 [3]: http://www.sencha.com/products/touch
-[4]: http://dev.sencha.com/deploy/touch/docs
-[5]: http://www.sencha.com/learn/Tutorial:Creating_new_UI_controls
-[6]: http://jquerymobile.com
-[7]: http://jqtouch.com
-[8]: http://github.com/mkimberlin/sencha-touch-experiments
-[9]: http://touchexperiments.appspot.com
+[4]: http://www.sencha.com/products/js
+[5]: http://dev.sencha.com/deploy/touch/docs
+[6]: http://www.sencha.com/learn/Tutorial:Creating_new_UI_controls
+[7]: http://jquerymobile.com
+[8]: http://jqtouch.com
+[9]: http://github.com/mkimberlin/sencha-touch-experiments
+[10]: http://touchexperiments.appspot.com
 
 [img1]: sencha-touch-experiments/raw/master/jnbOct2010-icon.png "The application icon on the home screen"
 [img2]: sencha-touch-experiments/raw/master/jnbOct2010-splash.png "A splash screen for Podiobooks.com"
