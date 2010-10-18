@@ -329,9 +329,9 @@ The example code used in this article is available on [github][8] and can also b
 [8]: http://github.com/mkimberlin/sencha-touch-experiments
 [9]: http://touchexperiments.appspot.com
 
-[img1]: jnbOct2010-icon.png "The application icon on the home screen"
-[img2]: jnbOct2010-splash.png "A splash screen for Podiobooks.com"
-[img3]: jnbOct2010-yoda.png "A tab with a Yoda quote"
-[img4]: jnbOct2010-map.png "A tab containing a map"
-[img5]: jnbOct2010-form.png "A tab containing a simple form"
-[img6]: jnbOct2010-list.png "A tab with a customized list showing audiobook updates"
+[img1]: raw/master/jnbOct2010-icon.png "The application icon on the home screen"
+[img2]: raw/master/jnbOct2010-splash.png "A splash screen for Podiobooks.com"
+[img3]: raw/master/jnbOct2010-yoda.png "A tab with a Yoda quote"
+[img4]: raw/master/jnbOct2010-map.png "A tab containing a map"
+[img5]: raw/master/jnbOct2010-form.png "A tab containing a simple form"
+[img6]: raw/master/jnbOct2010-list.png "A tab with a customized list showing audiobook updates"
