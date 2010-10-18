@@ -1,14 +1,14 @@
 Mobile Application Development with Sencha Touch
 ================================================
-Interest in mobile application development has increased significantly in recent years. This young industry has generated a tremendous amount of activity in both open and closed source projects. Many developers see an opportunity to reap the benefits of their efforts more directly than they have previously been able. Making the leap into mobile development can seem daunting, as it often involves learning new languages and technologies. If the siren call of "App Store" purchases penetrates your defenses and awakens your inner entrepreneur, how do you decided what devices to target? With iPhone and iPad application sales running into the billions of dollars yearly, it seems silly to ignore them. However, one certainly should not completely discount the growing Android market either. Targeting the diverse array of devices available today can be difficult and often results in divergent code bases. Native application development for Apple devices requires investment in Apple hardware beyond the devices themselves, and there are licensing costs as well. These considerations can bring a quick end to the aspirations of a would-be mobile developer. To ease the transition, [Sencha](http://www.sencha.com/) has released a mobile application framework that is based on standard web technologies and allows developers to leverage their existing skill sets. Before getting too excited, you should understand that Sencha is only free if you are building Free and Open Source Software. If you are hoping to get rich, you will need to be ready to pony up the (relatively) affordable license fee. In either case, Sencha Touch presents an easy way to get your feet wet with mobile application development.
+Interest in mobile application development has increased significantly in recent years. This young industry has generated a tremendous amount of activity in both open and closed source projects. Many developers see an opportunity to reap the benefits of their efforts more directly than they have previously been able. Making the leap into mobile development can seem daunting, as it often involves learning new languages and technologies. If the siren call of "App Store" purchases penetrates your defenses and awakens your inner entrepreneur, how do you decided what devices to target? With iPhone and iPad application sales running into the billions of dollars yearly, it seems silly to ignore them. However, one certainly should not completely discount the growing Android market either. Targeting the diverse array of devices available today can be difficult and often results in divergent code bases. Native application development for Apple devices requires investment in Apple hardware beyond the devices themselves, and there are licensing costs as well. These considerations can bring a quick end to the aspirations of a would-be mobile developer. To ease the transition, [Sencha][1] has released a mobile application framework that is based on standard web technologies and allows developers to leverage their existing skill sets. Before getting too excited, you should understand that Sencha is only free if you are building Free and Open Source Software. If you are hoping to get rich, you will need to be ready to pony up the (relatively) affordable license fee. In either case, Sencha Touch presents an easy way to get your feet wet with mobile application development.
 
 But, Is It For Me?
 ------------------
-There are some downsides to development with Sencha Touch, the most obvious being the lack of access to most native APIs. Whether or not this is a hindrance depends strongly on the type of application that you intend to write. If you have the next blockbuster game in mind, then you likely want to move beyond Sencha Touch and focus your efforts on native development. However, if your application does not require tight integration with the device, Sencha may be more than enough to fill your needs. Sencha applications are web applications. As such, they are built entirely on HTML, JavaScript and CSS. This means they are not "App Store Ready" out of the gate. Combining Sencha Touch with a framework like [PhoneGap](http://www.phonegap.com/) can enable you to bring your application to market. Alternatively, Sencha Touch applications can be delivered directly via the web from your existing site. This cuts out the middleman, but leaves any monetization up to you and restricts your exposure in this crowded market. However, if your goal is a mobile extension of your site then this is a simple and natural way to deploy.
+There are some downsides to development with Sencha Touch, the most obvious being the lack of access to most native APIs. Whether or not this is a hindrance depends strongly on the type of application that you intend to write. If you have the next blockbuster game in mind, then you likely want to move beyond Sencha Touch and focus your efforts on native development. However, if your application does not require tight integration with the device, Sencha may be more than enough to fill your needs. Sencha applications are web applications. As such, they are built entirely on HTML, JavaScript and CSS. This means they are not "App Store Ready" out of the gate. Combining Sencha Touch with a framework like [PhoneGap][2] can enable you to bring your application to market. Alternatively, Sencha Touch applications can be delivered directly via the web from your existing site. This cuts out the middleman, but leaves any monetization up to you and restricts your exposure in this crowded market. However, if your goal is a mobile extension of your site then this is a simple and natural way to deploy.
 
 Getting Started
 ---------------
-Setting up a Sencha Touch project is easy. The Sencha Touch source can be downloaded from the [product page](http://www.sencha.com/products/touch/). Extract the Sencha Touch development JavaScript source and CSS to the desired location in your project. Then construct a simple HTML file that references both of these files as well as any application CSS files that you might have and the JavaScript source file that you will use. The source for such a page should look something like this:
+Setting up a Sencha Touch project is easy. The Sencha Touch source can be downloaded from the [product page][3]. Extract the Sencha Touch development JavaScript source and CSS to the desired location in your project. Then construct a simple HTML file that references both of these files as well as any application CSS files that you might have and the JavaScript source file that you will use. The source for such a page should look something like this:
 
     <!DOCTYPE html>
     <html>
@@ -48,6 +48,9 @@ Once the application HTML is in place, development of your mobile application ca
             var app = new MyApp.App();
         }
     });
+
+On the iPhone, this will produce a glossed icon from the provided image and assign a splash screen for display when the application is loading:
+![A glossed icon on an iPhone home screen][img1] ![An example application splash screen][img2]
 
 Basic Components
 ----------------
@@ -113,7 +116,59 @@ Sencha provides a number of visual components out-of-the-box. Creating instances
         }
     });
 
-As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation](http://dev.sencha.com/deploy/touch/docs/) for that class.  Here is an (incomplete) list of some of the more common component xtypes:  
+The application above creates a number of tabs inside of a Tab panel including some simple text, a map and a basic form.  Here is one of the simple tab definitions:
+
+    {
+        title: 'Yoda',
+        html: 'Do or do not. There is no try.',
+        cls: 'card1'
+    }
+
+This produces a tab like this:
+
+![A simple tab panel containing a quote from Yoda][img3]
+
+Here is a map tab that automatically requests the current location and centers on it:
+
+    {
+        xtype: 'map',
+        title: 'Map',
+        getLocation: true
+    }
+
+![A simple tab panel containing a quote from Yoda][img4]
+
+The form panel makes use of a number of other components:
+
+    {
+        xtype: 'form',
+        title: 'Form',
+        items: [{
+            xtype: 'textfield',
+            name : 'first',
+            label: 'First name'
+        }, {
+            xtype: 'textfield',
+            name : 'last',
+            label: 'Last name'
+        }, {
+            xtype: 'numberfield',
+            name : 'age',
+            label: 'Age'
+        }, {
+            xtype: 'urlfield',
+            name : 'url',
+            label: 'Website'
+        },{
+            xtype: 'slider',
+            name: 'slide',
+            label: 'Whee!'
+        }]
+	}
+
+![A form containing a few example field components][img5]
+	
+As you can see, the declarative method of component definition is relatively concise and allows us to avoid unnecessary object construction code where possible, leaving it to the framework to manage the lifecycle of those objects.  To determine the xtype to use for a particular class of component, reference the [Sencha Touch API Documentation][4] for that class.  Here is an (incomplete) list of some of the more common component xtypes:  
 
     xtype            Class
     -------------    ------------------
@@ -152,11 +207,11 @@ As you can see, the declarative method of component definition is relatively con
 
 Custom Components
 -----------------
-While the components provided by Sencha Touch provide a great starting point, you will eventually need to define components with custom behavior and presentation.  This can be done using Ext.extend().  The implementation of MyApp.App above makes use of this mechanism to customize the behavior of Ext.TabPanel.  It is also possible to define the HTML for a component via the "html" or "tpl" configuration options.  Sencha provides [a tutorial](http://www.sencha.com/learn/Tutorial:Creating_new_UI_controls) that details some pitfalls and best practices to consider when developing custom components.
+While the components provided by Sencha Touch provide a great starting point, you will eventually need to define components with custom behavior and presentation.  This can be done using Ext.extend().  The implementation of MyApp.App above makes use of this mechanism to customize the behavior of Ext.TabPanel.  It is also possible to define the HTML for a component via the "html" or "tpl" configuration options.  Sencha provides [a tutorial][5] that details some pitfalls and best practices to consider when developing custom components.
 
 Events and Handlers
 -------------------
-Most Sencha Touch components provide a number of events to signal various state or lifecycle changes.  Registering handlers for these events is as simple as a method call.
+Providing custom behaviors is typically done by writing event handlers. Most Sencha Touch components provide a number of events to signal various state or lifecycle changes.  Registering handlers for these events is as simple as a method call.
 
     MyApp.BookList = Ext.extend(Ext.List, {
         title: 'Books',
@@ -179,7 +234,7 @@ Most Sencha Touch components provide a number of events to signal various state 
         }
     });
 
-Here you can see that the onItemTap is registered to handle the 'itemtap' event on this extension of Ext.List.  In turn, it fires a custom event and provides the title of the selected book to any registered handlers.  The arguments provided to the handlers of any given event may vary.  You can find information on the events for a particular component in the [Sencha Touch API documentation](http://dev.sencha.com/deploy/touch/docs/).
+Here you can see that the onItemTap is registered to handle the 'itemtap' event on this extension of Ext.List.  In turn, it fires a custom event and provides the title of the selected book to any registered handlers.  The arguments provided to the handlers of any given event may vary.  You can find information on the events for a particular component in the [Sencha Touch API documentation][4].
 
 Templating
 ----------
@@ -221,6 +276,10 @@ A template based on this definition can then be constructed with a call to Ext.X
             MyApp.BookList.superclass.initComponent.call(this);
         }
 
+Either of these approaches gives a list with customized item formatting and behavior:
+
+![A customized list of audiobook titles][img6]
+
 Data Stores
 -----------
 Most of the time, you will not be working with static data sets.  Sencha Touch provides a CRUD based abstraction for data stores in Ext.data.Store. Sencha comes with implementations of HTML5-based local and session storage backed data stores as well as array and JSON based implementations.  Data stores access their data via Ext.data.Proxy implementations.  Sencha comes with proxies for accessing data via RESTful web services, generic AJAX calls, local or session storage.  Both JSON and XML are supported as transmission formats and other formats can be accomplished by implementing custom marshaling logic.  The MyApp.bookstore data store used by the example application is a JSON backed store that retrieves its data via a RESTful web service.
@@ -256,6 +315,23 @@ Different data stores can share a common model as well, enabling the simple impl
 
 The Take Away
 -------------
-Mobile application development based on HTML5, JavaScript and CSS is a viable option for many types of applications and frameworks like Sencha Touch make it even more attractive.  Standard web technologies can be used to implement mobile applications that are pleasant to use, fully featured and functional on or off-line.  Sencha Touch is tackling an ambitious goal with encouraging results.  While there are a few rough points in the API, the project is still in beta and there are sure to be further improvements to come.
+Mobile application development based on HTML5, JavaScript and CSS is a viable alternative for many types of applications. Frameworks like Sencha Touch make this an even more attractive option. Standard web technologies can be used to implement mobile applications that are pleasant to use, fully featured and functional on or off-line. The web-based mobile application space is still heating up. With frameworks like the just announced [jQuery Mobile][6] on the horizon and Jonathan Stark's adoption of the [jQTouch][7] framework, there are sure to be a wealth of options and a healthy competition going forward. Sencha Touch is tackling an ambitious goal with encouraging results. While there are a few rough points in the API, the project is still in beta and there are sure to be further improvements to come.
 
-The example code used in this article is available on [github](http://github.com/mkimberlin/sencha-touch-experiments/) and can also be seen ["in action"](http://touchexperiments.appspot.com).  Thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice and to Lance Finney for his unending patience.
+The example code used in this article is available on [github][8] and can also be seen ["in action"][9].  Thanks to Brian Gilstrap, Mark Volkmann and Dan Troesser for taking the time to review this article on short notice and to Lance Finney for his unending patience.
+
+[1]: http://www.sencha.com
+[2]: http://www.phonegap.com
+[3]: http://www.sencha.com/products/touch
+[4]: http://dev.sencha.com/deploy/touch/docs
+[5]: http://www.sencha.com/learn/Tutorial:Creating_new_UI_controls
+[6]: http://jquerymobile.com
+[7]: http://jqtouch.com
+[8]: http://github.com/mkimberlin/sencha-touch-experiments
+[9]: http://touchexperiments.appspot.com
+
+[img1]: jnbOct2010-icon.png "The application icon on the home screen"
+[img2]: jnbOct2010-splash.png "A splash screen for Podiobooks.com"
+[img3]: jnbOct2010-yoda.png "A tab with a Yoda quote"
+[img4]: jnbOct2010-map.png "A tab containing a map"
+[img5]: jnbOct2010-form.png "A tab containing a simple form"
+[img6]: jnbOct2010-list.png "A tab with a customized list showing audiobook updates"
